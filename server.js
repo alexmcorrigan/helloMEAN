@@ -37,15 +37,60 @@ router.use(function (req, res, next) {
 });
 
 router.route('/consultants')
-
     .get(function (req, res) {
-        res.json({
-            'type': 'consultant'
+        Employee.find(function (err, employees) {
+            if (err)
+                res.send(err);
+            res.json(employees);
+        });
+    })
+
+    .post(function (req, res) {
+        var employee = new Employee();
+        employee.type = req.body.type;
+        employee.save(function (err) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'Employee Created'});
+        });
+    });
+
+
+router.route('/consultants/:employee_id')
+    .get(function (req, res) {
+        Employee.findById(req.params.employee_id, function (err, employee) {
+            if (err)
+                res.send(err);
+            res.json(employee);
+            console.log(employee.type);
+        });
+    })
+
+    .put(function (req, res) {
+        Employee.findById(req.params.employee_id, function (err, employee) {
+            if (err)
+                res.send(err);
+
+            employee.type = req.body.type;
+            employee.save(function (err) {
+                if (err)
+                    res.send(err);
+                res.json({ message: 'Employee Updated'});
+            });
+        });
+    })
+
+    .delete(function (req, res) {
+        Employee.remove({
+            _id: req.params.employee_id
+        }, function (err, employee) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'Employee Deleted'});
         });
     });
 
 router.route('/supportStaff')
-
     .get(function (req, res) {
         res.json({
             'type': 'supportStaff'
