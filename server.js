@@ -17,10 +17,42 @@ app.use(bodyParser());
 app.use(methodOverride());
 
 if ('development' == env) {
+    mongoose.connect('mongodb://localhost:27017/helloMEAN');
 }
 
+var Employee = require('./app/models/employee');
+
 //routes
-require('./app/routes')(app);
+var router = express.Router();
+
+router.get('/', function (req, res) {
+    res.json({
+        'message': 'API WORKING'
+    });
+});
+
+router.use(function (req, res, next) {
+    console.log('stuff happened');
+    next();
+});
+
+router.route('/consultants')
+
+    .get(function (req, res) {
+        res.json({
+            'type': 'consultant'
+        });
+    });
+
+router.route('/supportStaff')
+
+    .get(function (req, res) {
+        res.json({
+            'type': 'supportStaff'
+        });
+    });
+
+app.use('/api', router);
 
 //start app
 app.listen(port);

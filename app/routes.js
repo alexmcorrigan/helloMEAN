@@ -1,19 +1,18 @@
-module.exports = function(app) {
+module.exports = function (app) {
 
-    app.get('/api/supportStaff', function(req, res) {
+    var router = app.Router();
+
+    router.get('/', function (req, res) {
         res.json({
-            'type' : 'supportStaff'
+            'message': 'API WORKING'
         });
     });
 
-    app.get('/api/consultants', function(req, res) {
-        res.json({
-            'type' : 'consultants'
-        });
+    router.use(function (req, res, next) {
+        console.log('stuff happened');
+        next();
     });
 
-    app.get('*', function(req, res) {
-        res.sendfile('./public/index.html');
-    });
+    app.use('/api', router);
 
 };
