@@ -1,5 +1,5 @@
 #Hello MEAN
-Example MEAN stack single page application (SPA). Works as template for new SPA projects.
+Example MEAN stack Single Page Application (SPA). Works as template for new SPA projects.
 
 Based on the tutorial [Setting Up a MEAN Stack Single Page Application](http://scotch.io/bar-talk/setting-up-a-mean-stack-single-page-application)
 
