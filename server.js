@@ -94,7 +94,14 @@ router.route('/employees/:employee_id')
     });
 
 //API routes for employee type
-//TODO
+router.route('/employees/type/:employee_type')
+    .get(function (req, res) {
+        Employee.find({type : req.params.employee_type}, function (err, employee) {
+            if (err)
+                res.send(err);
+            res.json(employee);
+        });
+    });
 
 app.use('/api', router);
 
