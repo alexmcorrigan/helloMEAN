@@ -36,7 +36,8 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.route('/consultants')
+// API routes for bulk employee
+router.route('/employees')
     .get(function (req, res) {
         Employee.find(function (err, employees) {
             if (err)
@@ -47,7 +48,9 @@ router.route('/consultants')
 
     .post(function (req, res) {
         var employee = new Employee();
+        employee.name = req.body.name;
         employee.type = req.body.type;
+
         employee.save(function (err) {
             if (err)
                 res.send(err);
@@ -55,14 +58,13 @@ router.route('/consultants')
         });
     });
 
-
-router.route('/consultants/:employee_id')
+// API routes for employee ID
+router.route('/employees/:employee_id')
     .get(function (req, res) {
         Employee.findById(req.params.employee_id, function (err, employee) {
             if (err)
                 res.send(err);
             res.json(employee);
-            console.log(employee.type);
         });
     })
 
@@ -71,11 +73,12 @@ router.route('/consultants/:employee_id')
             if (err)
                 res.send(err);
 
+            employee.name = req.body.name;
             employee.type = req.body.type;
             employee.save(function (err) {
                 if (err)
                     res.send(err);
-                res.json({ message: 'Employee Updated'});
+                res.json({ message: 'Employee Updated' });
             });
         });
     })
@@ -90,12 +93,8 @@ router.route('/consultants/:employee_id')
         });
     });
 
-router.route('/supportStaff')
-    .get(function (req, res) {
-        res.json({
-            'type': 'supportStaff'
-        });
-    });
+//API routes for employee type
+//TODO
 
 app.use('/api', router);
 

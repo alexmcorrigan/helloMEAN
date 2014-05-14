@@ -1,0 +1,19 @@
+<div class="jumbotron text-center">
+    <h1>Employees</h1>
+    <h2>{{ tagline }}</h2>
+</div>
+
+<p>Have {{ employees.length }} employees...</p>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>type</th>
+    </tr>
+    <tr ng-repeat="employee in employees">
+        <td>{{ employee._id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.type }}</td>
+    </tr>
+</table>

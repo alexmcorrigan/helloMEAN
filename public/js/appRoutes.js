@@ -6,14 +6,9 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'MainController'
         })
 
-        .when('/supportStaff', {
-            templateUrl: 'views/supportStaff.html',
-            controller: 'SupportStaffController'
-        })
-
-        .when('/consultants', {
-            templateUrl: 'views/consultant.html',
-            controller: 'ConsultantController'
+        .when('/employees', {
+            templateUrl: 'views/employee.html',
+            controller: 'EmployeeController'
         });
 
     $locationProvider.html5Mode(true);
